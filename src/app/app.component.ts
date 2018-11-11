@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
+
+  @ViewChild('myInput1')
+  myInputVariable1: ElementRef;
+
+  @ViewChild('myInput2')
+  myInputVariable2: ElementRef;
+
   title = 'app';
   messageText: Array<string> = ['',''];
   messageImage: Array<any> = ['',''];
@@ -32,7 +41,8 @@ export class AppComponent {
 	    this.messages.push(message);
 	    this.messageText[i] = '';
 	    this.messageImage[i] = '';
-	    document.getElementById("imageselect"+i).textContent = '';
+	    if(i == 0) this.myInputVariable1.nativeElement.value = "";
+	    else this.myInputVariable2.nativeElement.value = "";
 	}
   }
 
